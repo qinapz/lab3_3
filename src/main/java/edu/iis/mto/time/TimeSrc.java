@@ -9,7 +9,7 @@ public final class TimeSrc implements TimeSource {
     private static int totalTimeChange;
     private static TimeSrc instance;
 
-    TimeSrc() {
+    private TimeSrc() {
         dateTime = DateTime.now();
     }
 
@@ -19,21 +19,23 @@ public final class TimeSrc implements TimeSource {
         }
         return instance;
     }
+
     @Override
-    public DateTime plusHours( int i){
-        totalTimeChange+=i;
-        dateTime=DateTime.now().plusHours( totalTimeChange );
+    public DateTime plusHours(int i) {
+        totalTimeChange += i;
+        dateTime = DateTime.now().plusHours( totalTimeChange );
         return dateTime;
     }
+
     @Override
-    public DateTime minusHours( int i){
-        totalTimeChange-=i;
-        dateTime=DateTime.now().minusHours( totalTimeChange );
+    public DateTime minusHours(int i) {
+        totalTimeChange -= i;
+        dateTime = DateTime.now().minusHours( totalTimeChange );
         return dateTime;
     }
+
     @Override
-    public DateTime getDateTime(){
-        System.out.println(dateTime);
+    public DateTime getDateTime() {
         return dateTime;
     }
 }
