@@ -1,19 +1,22 @@
 package edu.iis.mto.time;
 
+import java.time.Clock;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.joda.time.DateTime;
-import org.joda.time.Hours;
+import static java.time.temporal.ChronoUnit.HOURS;
 
 public class Order {
-	private static final int VALID_PERIOD_HOURS = 24;
+	private static final long VALID_PERIOD_HOURS = 24;
 	private State orderState;
 	private List<OrderItem> items = new ArrayList<OrderItem>();
-	private DateTime subbmitionDate;
+	private Instant submitionDate;
+	private Clock clock;
 
 	public Order() {
 		orderState = State.CREATED;
+		clock = Clock.systemDefaultZone();
 	}
 
 	public void addItem(OrderItem item) {
@@ -28,14 +31,14 @@ public class Order {
 		requireState(State.CREATED);
 
 		orderState = State.SUBMITTED;
-		subbmitionDate = new DateTime();
-
+		submitionDate = clock.instant();
 	}
 
 	public void confirm() {
 		requireState(State.SUBMITTED);
-		int hoursElapsedAfterSubmittion = Hours.hoursBetween(subbmitionDate, new DateTime()).getHours();
-		if(hoursElapsedAfterSubmittion > VALID_PERIOD_HOURS){
+		Instant now = clock.instant();
+		Instant deadline = submitionDate.plus(VALID_PERIOD_HOURS, HOURS);
+		if(now.isAfter(deadline)){
 			orderState = State.CANCELLED;
 			throw new OrderExpiredException();
 		}
