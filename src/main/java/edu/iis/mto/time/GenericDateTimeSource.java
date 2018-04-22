@@ -19,4 +19,9 @@ public class GenericDateTimeSource implements DateTimeSource {
     public DateTime getCurrentDate() {
         return dateTime;
     }
+
+    public DateTime forwardTime(int hours) {
+        dateTime = dateTime.plusHours(hours);
+        return dateTime;
+    }
 }
