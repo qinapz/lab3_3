@@ -45,6 +45,10 @@ public class Order {
 		this.dateTimeSource = dateTimeSource;
 	}
 
+	public DateTimeSource getDateTimeSource() {
+		return dateTimeSource;
+	}
+
 	public void confirm() {
 		requireState(State.SUBMITTED);
 		int hoursElapsedAfterSubmittion = Hours.hoursBetween(subbmitionDate, getCurrentDate()).getHours();

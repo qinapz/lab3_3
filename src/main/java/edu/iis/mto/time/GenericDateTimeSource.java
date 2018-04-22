@@ -7,10 +7,10 @@ public class GenericDateTimeSource implements DateTimeSource {
     private static DateTime dateTime;
 
     private GenericDateTimeSource() {
-        this.dateTime = new DateTime();
+        dateTime = new DateTime();
     }
 
-    public DateTimeSource getInstance() {
+    public static DateTimeSource getInstance() {
         if (instance == null) instance = new GenericDateTimeSource();
         return instance;
     }
@@ -20,6 +20,7 @@ public class GenericDateTimeSource implements DateTimeSource {
         return dateTime;
     }
 
+    @Override
     public DateTime forwardTime(int hours) {
         dateTime = dateTime.plusHours(hours);
         return dateTime;
