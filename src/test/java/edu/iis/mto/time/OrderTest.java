@@ -14,10 +14,10 @@ public class OrderTest {
 
         order.setDateTimeSource(GenericDateTimeSource.getInstance());
         order.addItem(orderItem);
-
-        order.getDateTimeSource().forwardTime(26);
-
         order.submit();
+
+        order.getDateTimeSource().forwardTime(25);
+
         order.confirm();
     }
 

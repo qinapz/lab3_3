@@ -22,7 +22,7 @@ public class GenericDateTimeSource implements DateTimeSource {
 
     @Override
     public DateTime forwardTime(int hours) {
-        dateTime = dateTime.plusHours(hours);
+        dateTime = dateTime.now().plusHours(hours);
         return dateTime;
     }
 }
