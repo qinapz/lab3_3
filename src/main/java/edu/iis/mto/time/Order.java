@@ -19,6 +19,10 @@ public class Order {
 		clock = Clock.systemDefaultZone();
 	}
 
+	public void setClock(Clock clock) {
+		this.clock = clock;
+	}
+
 	public void addItem(OrderItem item) {
 		requireState(State.CREATED, State.SUBMITTED);
 
