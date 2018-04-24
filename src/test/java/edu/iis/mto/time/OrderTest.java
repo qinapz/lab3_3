@@ -8,7 +8,7 @@ public class OrderTest {
     
     @Test(expected = OrderExpiredException.class)
     public void confirmingShouldThrowOrderExpiredException() {
-        order = new Order();
+        order = new Order(new TimeSrc());
         order.addItem(new OrderItem());
         order.submit();
         order.confirm();
